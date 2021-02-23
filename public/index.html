@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Redirector for Organisations | Keegan Digital</title>
+    <link rel="shortcut icon" href="/icons/favicon.ico" />
+    <meta name="theme-color" content="#ffffff" />
+    <style>
+      :root {
+        --font-weight-body: 400;
+        --font-weight-headings: 400;
+        --background-color-root: rgb(41, 45, 45);
+
+        /* Color scheme */
+        --color-background-main: #fafafa;
+        --color-background: #fff;
+        --color-field-border: rgba(0, 0, 0, 0.4);
+        --color-foreground: rgba(0, 0, 0, 0.8);
+        --color-text-default: rgba(0, 0, 0, 0.8);
+        --color-text-link-default: rgb(0, 120, 191);
+        --color-text-link-hover: rgb(2, 81, 125);
+        --color-text-link-visited: var(--color-text-link-default);
+        --font-weight-body: 400;
+        --font-weight-headings: 400;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --color-background-main: rgb(18, 19, 20);
+          --color-background: #000;
+          --color-field-border: rgba(255, 255, 255, 0.4);
+          --color-foreground: #fff;
+          --color-text-default: rgba(255, 255, 255, 0.8);
+          --color-text-link-default: rgba(51, 172, 244, 0.9);
+          --color-text-link-hover: rgba(51, 172, 244, 1);
+          --color-text-link-visited: var(--color-text-link-default);
+          --font-weight-body: 300;
+          --font-weight-headings: 400;
+        }
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        height: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+        background: var(--background-color-root);
+        font-family: -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto',
+          'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+          sans-serif;
+        font-size: 50%;
+      }
+
+      body {
+        display: grid;
+        grid-template-rows: 1fr auto;
+        grid-template-columns: min(100%, 100rem);
+        justify-content: center;
+        min-width: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 8rem 4rem 4rem;
+        background-color: var(--color-background-main);
+        color: var(--color-text-default);
+        font-size: 2.25rem;
+        font-weight: var(--font-weight-body);
+        line-height: 4rem;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-top: 0;
+        font-weight: var(--font-weight-headings);
+      }
+
+      h1 {
+        margin-bottom: 4rem;
+        font-size: 6rem;
+        line-height: 7rem;
+      }
+
+      h2 {
+        margin-bottom: 3rem;
+        font-size: 3rem;
+        line-height: 4rem;
+      }
+
+      h3 {
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+        font-size: 2.75rem;
+        font-weight: 600;
+        line-height: 4rem;
+      }
+
+      h4 {
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+        font-size: 2.75rem;
+        line-height: 3rem;
+      }
+
+      h5 {
+        margin-bottom: 1rem;
+        font-size: 2rem;
+        line-height: 3rem;
+      }
+
+      h6 {
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        line-height: 2rem;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      ul {
+        margin: 0 0 3rem;
+        padding: 0 0 0 3rem;
+      }
+
+      p {
+        margin: 0 0 2rem;
+      }
+
+      a {
+        color: var(--color-text-link-default);
+        text-decoration: none;
+      }
+
+      a:visited {
+        color: var(--color-text-link-visited);
+      }
+
+      a:hover {
+        color: var(--color-text-link-hover);
+        text-decoration: underline;
+      }
+
+      main {
+        flex: 1 0 auto;
+        max-width: 100rem;
+        height: 100%;
+      }
+
+      .label {
+        display: block;
+        margin-top: 2rem;
+      }
+
+      input {
+        width: 100%;
+        margin-top: 1rem;
+        padding: 1rem;
+        background: var(--color-background);
+        border: 1px solid var(--color-field-border);
+        border-radius: 0.5rem;
+        box-shadow: none;
+        color: var(--color-text-default);
+        font-size: 2rem;
+      }
+
+      input:focus {
+        box-shadow: 0 0 5px 3px var(--color-text-link-default);
+      }
+
+      .output-label {
+        display: none;
+      }
+
+      .output-label.visible {
+        display: block;
+      }
+
+      code {
+        display: block;
+        margin-top: 1rem;
+        padding: 1rem;
+        background: var(--color-background);
+        border-radius: 0.5rem;
+        font-size: 1.75rem;
+        line-height: 2rem;
+      }
+
+      footer {
+        display: grid;
+        grid-auto-flow: column;
+        grid-gap: 2rem;
+        justify-content: end;
+        color: #aaa;
+        font-weight: 300;
+        line-height: 3rem;
+        text-align: right;
+      }
+      
+      .source-link {
+        padding-left: 2rem;
+        border-left: 1px solid var(--color-field-border) ;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Redirector for Organisations</h1>
+      <h2>
+        Having trouble sharing a link to your favourite organisation on
+        Facebook?
+      </h2>
+      <p>
+        Simply fill out the form below to get a sharable link that won't get
+        blocked.
+      </p>
+      <form id="form" novalidate>
+        <label>
+          <span class="label">Organisation URL:</span>
+          <input
+            id="input"
+            type="url"
+            placeholder="https://my-awesome-charity.org"
+          />
+        </label>
+      </form>
+      <label id="output-label" class="output-label">
+        <span class="label">Copy-paste and share the URL below:</span>
+        <code id="output"></code>
+      </label>
+    </main>
+    <footer>
+      <span>
+        Lovingly built by
+        <a href="https://www.keegan.digital" target="_blank" rel="noreferrer">
+          Keegan Digital
+        </a>
+      </span>
+      <a href="https://github.com/keegan-lillo/go.keegan.gives" target="_blank" rel="noreferrer" class="source-link">
+        Source Code
+      </a>
+    </footer>
+    <script>
+      ;(function () {
+        const inputElem = document.getElementById('input')
+        const handleInput = () => {
+          const value = inputElem.value
+          document
+            .getElementById('output-label')
+            .classList.toggle('visible', Boolean(value))
+          document.getElementById('output').innerHTML = `${
+            document.location.origin
+          }/${value.replace(/^(?:http(s)?:\/\/)?(.*)/, 'http$1://$2')}`
+        }
+        document
+          .getElementById('form')
+          .addEventListener('submit', (e) => e.preventDefault())
+        document.getElementById('input').addEventListener('input', handleInput)
+
+        handleInput()
+      })()
+    </script>
+  </body>
+</html>

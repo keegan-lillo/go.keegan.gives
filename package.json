@@ -1,0 +1,39 @@
+{
+  "name": "fb-bypass",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Keegan Lillo <hello@keegan.gives>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "node-version": "node --version",
+    "build": "netlify-lambda build src/netlify-functions",
+    "lint": "run-p --aggregate-output --continue-on-error lint:*",
+    "lint:css": "stylelint '**/*.{scss,css}'",
+    "lint:js": "eslint '**/*.{js,jsx,ts,tsx}'",
+    "lint:prettier": "prettier . --check",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.0",
+    "@babel/preset-env": "^7.13.0",
+    "@babel/preset-typescript": "^7.13.0",
+    "@keegan-lillo/eslint-config-typescript-react": "^0.5.0",
+    "@keegan-lillo/prettier-config": "^0.5.0",
+    "@keegan-lillo/stylelint-config-scss": "^0.5.0",
+    "@types/aws-lambda": "^8.10.72",
+    "@types/node": "^14.14.31",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.20.0",
+    "netlify-lambda": "^2.0.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.2.1",
+    "stylelint": "^13.11.0",
+    "typescript": "^4.1.5"
+  },
+  "dependencies": {
+    "aws-lambda": "^1.0.6",
+    "node-html-parser": "^2.2.0",
+    "react": "^17.0.1"
+  }
+}

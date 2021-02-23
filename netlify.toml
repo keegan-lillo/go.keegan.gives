@@ -1,0 +1,15 @@
+[dev]
+autoLaunch = false # a Boolean value that determines if Netlify Dev launches the local server address in your browser
+
+[build]
+command = "yarn build"
+publish = "public"
+functions = "lambda"
+
+[build.environment]
+NODE_VERSION = "12"
+
+[[redirects]]
+from = "/http*"
+to = "/.netlify/functions/go"
+status = 200

@@ -1,0 +1,10 @@
+{
+  "extends": ["@keegan-lillo/typescript-react"],
+  "parserOptions": { "project": "./tsconfig.eslint.json" },
+  "rules": {
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      { "functions": false, "variables": false }
+    ]
+  }
+}
